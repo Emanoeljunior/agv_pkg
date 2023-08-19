@@ -17,13 +17,13 @@ BEn = 19
 class Motor :
     def __init__ (self, pin1, pin2, pinEn, sub):
         self.pin1 = pin1
-	self.pin2 = pin2
-	self.pinEn = pinEn
-	self.motor_sub = rospy.Subscriber(sub, Float64, self.updateMotorCallback, queue_size = 10)
+        self.pin2 = pin2
+        self.pinEn = pinEn
+        self.motor_sub = rospy.Subscriber(sub, Float64, self.updateMotorCallback, queue_size = 10)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin1, GPIO.OUT)
         GPIO.setup(self.pin2, GPIO.OUT)
-	GPIO.setup(self.pinEn, GPIO.OUT)
+        GPIO.setup(self.pinEn, GPIO.OUT)
         self.Motor_pwm = GPIO.PWM(self.pinEn, 120)
         self.Motor_pwm.start(0)
     def updateMotorCallback(self, msg):
@@ -52,5 +52,6 @@ if __name__ == '__main__':
         Motor(B1, B2, BEn, "/right_motor")
         rospy.spin()
     except rospy.ROSInterruptException:
+        GPIO.cleanup()
         pass
          
