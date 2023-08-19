@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     # ROS LOOP
     rospy.init_node("MPU6050")
-    rate = rospy.Rate(60)
+    rate = rospy.Rate(3)
     gyroPub = rospy.Publisher('/gyroscope_publisher', Point, queue_size=60)
     accPub = rospy.Publisher('/accelerometer_publisher', Point, queue_size=120)
     while not rospy.is_shutdown():
