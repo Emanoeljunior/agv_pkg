@@ -65,7 +65,7 @@ if __name__ == '__main__':
         Gyro = Point(Gx, Gy, Gz)
         Gyro = Point(0, 0, Gz)
         print "Ax: ", Ax, "Ay: ",Ay, "Az: ", Az
-        print "Gx ", Gx, "Gy: ", Gy, "Gz: ",Gz
+        print "Gx: ", Gx, "Gy: ", Gy, "Gz: ",Gz
         gyroPub.publish(Gyro)
         accPub.publish(Acc)
         rate.sleep()

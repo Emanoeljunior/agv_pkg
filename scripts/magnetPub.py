@@ -11,6 +11,7 @@ def compass():
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         compass_str = "Compass deviation: %s" % sensor.get_magnet()
+        compass_str = "Compass Data: [x: %s, y: %s, z: %s, t: %s]" % sensor.get_data()
         #rospy.loginfo(type(sensor.get_magnet()))
         print compass_str
         pub.publish(compass_str)
