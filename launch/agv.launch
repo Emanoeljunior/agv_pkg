@@ -1,0 +1,11 @@
+<launch>
+    <node name="MeanFilter" pkg="agv_pkg" type ="movingAverageIMU" output="screen"/>
+    <node name="MPU6050" pkg="agv_pkg" type ="gyroAccPub.py" output="screen"/>
+    <node name="Motor" pkg="agv_pkg" type ="motor.py" output="screen"/>
+    <node name="PositionVel" pkg="agv_pkg" type ="positionVelIntegrator" output="screen"/>
+    <node name="VelAcc" pkg="agv_pkg" type ="velAccIntegrator" output="screen"/>
+    <node name="ManualControl" pkg="agv_pkg" type ="velManual" output="screen"/>
+    <node name="Compass" pkg="agv_pkg" type ="magnetPub.py" output="screen"/>
+    <node name="GyroIntegrator" pkg="agv_pkg" type ="gyroIntegrator" output="screen"/>
+    
+</launch>

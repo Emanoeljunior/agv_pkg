@@ -1,0 +1,7 @@
+<launch>
+
+    <node name="MPU6050" pkg="agv_pkg" type ="gyroAccPub.py" output="screen"/>
+    <node name="Velocity" pkg="agv_pkg" type ="velIntegrator" output="screen"/> 
+    <node name="Position" pkg="agv_pkg" type ="positionIntegrator" output="screen"/>   
+
+</launch>
