@@ -12,7 +12,6 @@ def compass():
     rospy.init_node('compass', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        time.sleep(1)
         compass_str = "Compass deviation: %s" % sensor.get_magnet()
         d = sensor.get_data()
         compass_str = "Compass Data: [x: %s, y: %s, z: %s, t: %s]" % (d[0], d[1], d[2], d[3])
