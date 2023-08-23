@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+import smbus	
 import time	
 import rospy
 import py_qmc5883l
@@ -21,6 +22,7 @@ def compass():
 
 if __name__ == '__main__':
     try:
+        bus = smbus.SMBus(1)
         time.sleep(1)
         compass()
     except rospy.ROSInterruptException:
