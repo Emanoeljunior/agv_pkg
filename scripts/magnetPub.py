@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+import smbus	
 import rospy
 import py_qmc5883l
 from std_msgs.msg import String
@@ -20,6 +21,7 @@ def compass():
 
 if __name__ == '__main__':
     try:
+        bus = smbus.SMBus(1)
         compass()
     except rospy.ROSInterruptException:
         pass
