@@ -64,11 +64,13 @@ if __name__ == '__main__':
         Acc = Point(Ax, 0, 0)
         Gyro = Point(Gx, Gy, Gz)
         Gyro = Point(0, 0, Gz)
+        A = "Ax: " + str(Ax)  + "Ay: " + str(Ay) + "Az: "+ str(Az)
+        G = "Ax: " + str(Ax)  + "Ay: " + str(Ay)+ "Az: "+ str(Az)
         with open("gyro.txt","w") as f:
-                f.write("Ax: ", Ax, "Ay: ",Ay, "Az: ", Az)
-                f.write("Gx: ", Gx, "Gy: ", Gy, "Gz: ",Gz)
-        print "Ax: ", Ax, "Ay: ",Ay, "Az: ", Az
-        print "Gx: ", Gx, "Gy: ", Gy, "Gz: ",Gz
+                f.write(A)
+                f.write(G)
+        print A
+        print G
         gyroPub.publish(Gyro)
         accPub.publish(Acc)
         rate.sleep()
