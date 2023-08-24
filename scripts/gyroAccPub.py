@@ -64,6 +64,9 @@ if __name__ == '__main__':
         Acc = Point(Ax, 0, 0)
         Gyro = Point(Gx, Gy, Gz)
         Gyro = Point(0, 0, Gz)
+        with open("gyro.txt","w") as f:
+                f.write("Ax: ", Ax, "Ay: ",Ay, "Az: ", Az)
+                f.write("Gx: ", Gx, "Gy: ", Gy, "Gz: ",Gz)
         print "Ax: ", Ax, "Ay: ",Ay, "Az: ", Az
         print "Gx: ", Gx, "Gy: ", Gy, "Gz: ",Gz
         gyroPub.publish(Gyro)
