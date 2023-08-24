@@ -64,8 +64,8 @@ if __name__ == '__main__':
         Acc = Point(Ax, 0, 0)
         Gyro = Point(Gx, Gy, Gz)
         Gyro = Point(0, 0, Gz)
-        A = "Ax: " + str(Ax)  + "Ay: " + str(Ay) + "Az: "+ str(Az)
-        G = "Ax: " + str(Ax)  + "Ay: " + str(Ay)+ "Az: "+ str(Az)
+        A = f"Ax: {str(Ax)}  Ay: {str(Ay)}  Az: {str(Az)}\n"
+        G = f"Ax: {str(Ax)}  Ay: {str(Ay)}  Az: {str(Az)}\n"
         with open("gyro.txt","w") as f:
                 f.write(A)
                 f.write(G)
