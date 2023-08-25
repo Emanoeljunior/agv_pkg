@@ -66,7 +66,7 @@ if __name__ == '__main__':
                 Gyro = Point(Gx, Gy, Gz)
                 Gyro = Point(0, 0, Gz)
                 A = "Ax: {}  Ay: {}  Az: {}\n".format(str(Ax),str(Ay),str(Az))
-                G = "Ax: {}  Ay: {}  Az: {}\n".format(str(Ax),str(Ay),str(Az))
+                G = "Gx: {}  Gy: {}  Gz: {}\n".format(str(Gx),str(Gy),str(Gz))
                 f.write(A)
                 f.write(G)
                 print A
