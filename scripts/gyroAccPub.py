@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     # ROS LOOP
     rospy.init_node("MPU6050")
-    rate = rospy.Rate(3)
+    rate = rospy.Rate(60)  # 60hz
     gyroPub = rospy.Publisher('/gyroscope_publisher', Point, queue_size=60)
     accPub = rospy.Publisher('/accelerometer_publisher', Point, queue_size=120)
     while not rospy.is_shutdown():
@@ -66,8 +66,8 @@ if __name__ == '__main__':
         # Gyro = Point(0, 0, Gz)
         # A = "Ax: {}  Ay: {}  Az: {}\n".format(str(Ax),str(Ay),str(Az))
         # G = "Gx: {}  Gy: {}  Gz: {}\n".format(str(Gx),str(Gy),str(Gz))
-        print Acc
-        print Gyro
+        # print Acc
+        # print Gyro
         gyroPub.publish(Gyro)
         accPub.publish(Acc)
         rate.sleep()
