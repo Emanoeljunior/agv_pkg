@@ -10,7 +10,7 @@ sensor = py_qmc5883l.QMC5883L()
 def compass():
     pub = rospy.Publisher('magnet', String, queue_size=10)
     rospy.init_node('compass', anonymous=True)
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(60) # 60hz
     while not rospy.is_shutdown():
         compass_str = "Compass deviation: %s" % sensor.get_magnet()
         d = sensor.get_data()
