@@ -18,7 +18,7 @@ def compass():
         # compass_str = "Compass deviation: %s" % sensor.get_magnet()
         d = sensor.get_data()
         # magnetometer = Point(d[0],d[1],d[2])
-        print "%s, %s, %s" % d[0],d[1],d[2]
+        print "%s" % d[0]
         # pub.publish(magnetometer)
         count +=1
 
