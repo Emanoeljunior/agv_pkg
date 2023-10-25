@@ -15,7 +15,7 @@ def compass():
         # compass_str = "Compass deviation: %s" % sensor.get_magnet()
         d = sensor.get_data()
         magnetometer = Point(d[0],d[1],d[2])
-        pub.publish(magnetometer)
+        # pub.publish(magnetometer)
         rate.sleep()
 
 if __name__ == '__main__':
