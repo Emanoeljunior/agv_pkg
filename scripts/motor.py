@@ -39,6 +39,7 @@ class Motor :
 
 if __name__ == '__main__':
     try:
+	print "hello"
         rospy.init_node("motor_node")
         #left motor
         A1 = 16
@@ -48,6 +49,7 @@ if __name__ == '__main__':
         B1 = 26
         B2 = 21
         BEn = 19
+	print "here"
         Motor(A1, A2, AEn, "/left_motor")
         Motor(B1, B2, BEn, "/right_motor")
         rospy.spin()
