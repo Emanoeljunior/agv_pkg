@@ -26,7 +26,6 @@ def compass():
 
 if __name__ == '__main__':
     try:
-        bus = smbus.SMBus(1)
         compass()
     except:
         print 'Error'
