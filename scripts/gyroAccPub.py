@@ -61,13 +61,7 @@ if __name__ == '__main__':
         Gy = gyro_y/131.0
         Gz = gyro_z/131.0
         Acc = Point(Ax, Ay, Az)
-        # Acc = Point(Ax, 0, 0)
         Gyro = Point(Gx, Gy, Gz)
-        # Gyro = Point(0, 0, Gz)
-        # A = "Ax: {}  Ay: {}  Az: {}\n".format(str(Ax),str(Ay),str(Az))
-        # G = "Gx: {}  Gy: {}  Gz: {}\n".format(str(Gx),str(Gy),str(Gz))
-        # print Acc
-        # print Gyro
         gyroPub.publish(Gyro)
         accPub.publish(Acc)
         rate.sleep()

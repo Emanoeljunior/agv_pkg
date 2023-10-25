@@ -2,12 +2,14 @@
 
 import rospy
 from geometry_msgs.msg import Point
+from matplotlib import pyplot as plt
 
 
 class GyroAccc :
     
     def __init__ (self, sub, pub):
         self.points = []
+        # self.counter = 0
         self.mean = Point(0,0,0)
         self.gyro_acc_sub = rospy.Subscriber(sub, Point, self.moving_avarage, queue_size = 20)
         self.gyro_mean_pub = rospy.Publisher(pub, Point, queue_size=20)
@@ -28,6 +30,16 @@ class GyroAccc :
         # print("Length:", len(self.points))
         # print("Mean", self.mean)
         self.gyro_mean_pub.publish(self.mean)
+        self.plot_x(self.mean)
+    
+    # def plot_x(self,msg):
+    #     if self.counter % 2 == 0:
+    #         plt.plot(msg.y, msg.x, '*')
+    #         plt.axis("equal")
+    #         plt.draw()
+    #         plt.pause(0.00000000001)
+
+    #     self.counter += 1
         
 
 if __name__ == '__main__':
