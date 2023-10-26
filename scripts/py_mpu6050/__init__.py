@@ -44,7 +44,7 @@ class MPU6050(object):
         self.bus.write_byte_data(Device_Address, INT_ENABLE, 0)
     
     def stand_by(self):
-        self.bus.write_byte_data(Device_Address, STANDBY, 0b0011_1111)
+        self.bus.write_byte_data(Device_Address, STANDBY, 63) #0b0011_1111
         
     def read_raw_data(self,addr):
 	      #Accelero and Gyro value are 16-bit
