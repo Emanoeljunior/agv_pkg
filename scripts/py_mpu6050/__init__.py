@@ -54,3 +54,20 @@ class MPU6050(object):
         if(value > 32768):
                 value = value - 65536
         return value
+    
+    def get_data(self):
+        acc_x = self.read_raw_data(ACCEL_XOUT_H)
+        acc_y = self.read_raw_data(ACCEL_YOUT_H)
+        acc_z = self.read_raw_data(ACCEL_ZOUT_H)	
+        gyro_x = self.read_raw_data(GYRO_XOUT_H)
+        gyro_y = self.read_raw_data(GYRO_YOUT_H)
+        gyro_z = self.read_raw_data(GYRO_ZOUT_H)
+        
+        Ax = (acc_x/16384.0-0.101778)*9.81 #16384 -> 1g 
+        Ay = (acc_y/16384.0+0.007739)*9.81
+        Az = (acc_z/16384.0-0.987720)*9.81	
+        Gx = gyro_x/131.0
+        Gy = gyro_y/131.0
+        Gz = gyro_z/131.0
+        
+        return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
