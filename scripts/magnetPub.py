@@ -23,4 +23,4 @@ if __name__ == '__main__':
         compass()
     except rospy.ROSInterruptException:
         sensor.bus.close()
-        pass
+        print "exit successfully"        
