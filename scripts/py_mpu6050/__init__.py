@@ -77,5 +77,5 @@ class MPU6050(object):
         return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
     
     def __del__(self):
-        self.stand_by()
+        print "MPU6050 deleted"
                 
