@@ -32,7 +32,9 @@ GYRO_ZOUT_H  = 0x47
 
 class MPU6050(object):
     
-    def __init__(self):
+    def __init__(self, bus):
+        self.bus = bus
+      
         # MPU6050 configuration
         bus.write_byte_data(Device_Address, SMPLRT_DIV, 0)
         bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
