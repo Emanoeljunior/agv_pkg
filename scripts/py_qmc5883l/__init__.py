@@ -63,7 +63,7 @@ OSR_64 = 0b11000000     # Over Sample Rate 64: more noise, less power.
 class QMC5883L(object):
     """Interface for the QMC5883l 3-Axis Magnetic Sensor."""
     def __init__(self,
-                 bus=bus,
+                 bus,
                  address=DFLT_ADDRESS,
                  output_data_rate=ODR_10HZ,
                  output_range=RNG_2G,

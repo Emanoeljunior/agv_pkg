@@ -26,7 +26,7 @@ if __name__ == '__main__':
     bus = smbus.SMBus(1)
     rospy.on_shutdown(bus.close)
     acc_gyro = py_mpu6050.MPU6050(bus)
-    compass = py_qmc5883l.QMC5883L(bus=bus)
+    compass = py_qmc5883l.QMC5883L(bus)
     
     # ROS LOOP
     rospy.init_node("Sensors")
