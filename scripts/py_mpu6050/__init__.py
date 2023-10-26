@@ -29,6 +29,7 @@ ACCEL_ZOUT_H = 0x3F
 GYRO_XOUT_H  = 0x43
 GYRO_YOUT_H  = 0x45
 GYRO_ZOUT_H  = 0x47
+STANDBY      = 0x6C
 
 class MPU6050(object):
     
@@ -41,6 +42,9 @@ class MPU6050(object):
         self.bus.write_byte_data(Device_Address, CONFIG, 0)
         self.bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
         self.bus.write_byte_data(Device_Address, INT_ENABLE, 0)
+    
+    def stand_by(self):
+        self.bus.write_byte_data(Device_Address, STANDBY, 0b0011_1111)
         
     def read_raw_data(self,addr):
 	      #Accelero and Gyro value are 16-bit
@@ -71,3 +75,7 @@ class MPU6050(object):
         Gz = gyro_z/131.0
         
         return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
+    
+    def __del__(self):
+        self.stand_by()
+                
