@@ -87,8 +87,8 @@ class QMC5883L(object):
 
     def __del__(self):
         """Once finished using the sensor, switch to standby mode."""
-        print "after here on del"
-        self.mode_standby()
+        print "delete magnetometer"
+        # self.mode_standby() # here smbus already die
 
     def mode_continuous(self):
         """Set the device in continuous read mode."""
