@@ -248,5 +248,3 @@ class QMC5883L(object):
                            fset=set_calibration,
                            doc=u'Transformation matrix to adjust (x, y) magnetic vector.')
     
-    def end_properly(self):
-        self.bus.close()
