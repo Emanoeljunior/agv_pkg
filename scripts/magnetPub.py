@@ -19,7 +19,7 @@ def compass():
         rate.sleep()
         
 def end_compass():
-    sensor.bus.close()
+    sensor.end_properly()
 
 if __name__ == '__main__':
     try:
