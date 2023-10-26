@@ -6,13 +6,13 @@ from geometry_msgs.msg import Point
 import py_mpu6050
 import py_qmc5883l
 
-def compass_read_pub(bus):
+def compass_read_pub(compass):
     pub = rospy.Publisher('magnet', Point, queue_size=10)
-    d = sensor.get_data()
+    d = compass.get_data()
     magnetometer = Point(d[0],d[1],d[2])
     pub.publish(magnetometer)
 
-def acc_gyro_read_pub(bus):
+def acc_gyro_read_pub(acc_gyro):
     
     acc, gyro = acc_gyro.get_data()
     Acc = Point(acc["x"], acc["y"], acc["z"])
