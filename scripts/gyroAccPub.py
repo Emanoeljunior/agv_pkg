@@ -42,7 +42,6 @@ if __name__ == '__main__':
     bus.write_byte_data(Device_Address, CONFIG, 0)
     bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
     bus.write_byte_data(Device_Address, INT_ENABLE, 0)
-    bus.close()
 
     # ROS LOOP
     rospy.init_node("MPU6050")
