@@ -3,13 +3,13 @@
 import smbus	
 import rospy
 from geometry_msgs.msg import Point
-import py_qmc5883l
+import py_mpu6050
 
 
 if __name__ == '__main__':
     bus = smbus.SMBus(1)
     rospy.on_shutdown(bus.close)
-    sensor = py_qmc5883l.QMC5883l()
+    sensor = py_mpu6050.MPU6050()
 
     # ROS LOOP
     rospy.init_node("MPU6050")
