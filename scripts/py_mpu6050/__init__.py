@@ -36,16 +36,16 @@ class MPU6050(object):
         self.bus = bus
       
         # MPU6050 configuration
-        bus.write_byte_data(Device_Address, SMPLRT_DIV, 0)
-        bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
-        bus.write_byte_data(Device_Address, CONFIG, 0)
-        bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
-        bus.write_byte_data(Device_Address, INT_ENABLE, 0)
+        self.bus.write_byte_data(Device_Address, SMPLRT_DIV, 0)
+        self.bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
+        self.bus.write_byte_data(Device_Address, CONFIG, 0)
+        self.bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
+        self.bus.write_byte_data(Device_Address, INT_ENABLE, 0)
         
     def read_raw_data(addr):
 	      #Accelero and Gyro value are 16-bit
-        high = bus.read_byte_data(Device_Address, addr)
-        low = bus.read_byte_data(Device_Address, addr+1)
+        high = self.bus.read_byte_data(Device_Address, addr)
+        low = self.bus.read_byte_data(Device_Address, addr+1)
 
         #concatenate higher and lower value
         value = ((high << 8) | low)
