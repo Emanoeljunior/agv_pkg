@@ -87,6 +87,7 @@ class QMC5883L(object):
 
     def __del__(self):
         """Once finished using the sensor, switch to standby mode."""
+        print "after here on del"
         self.mode_standby()
 
     def mode_continuous(self):

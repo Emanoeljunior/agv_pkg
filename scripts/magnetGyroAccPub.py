@@ -21,10 +21,14 @@ def acc_gyro_read_pub(acc_gyro):
     accPub = rospy.Publisher('/accelerometer_publisher', Point, queue_size=120)
     gyroPub.publish(Gyro)
     accPub.publish(Acc)
+    
+def end():
+    print "first here"
+    bus.close()
 
 if __name__ == '__main__':
     bus = smbus.SMBus(1)
-    rospy.on_shutdown(bus.close)
+    rospy.on_shutdown(end)
     acc_gyro = py_mpu6050.MPU6050(bus)
     compass = py_qmc5883l.QMC5883L(bus)
     
