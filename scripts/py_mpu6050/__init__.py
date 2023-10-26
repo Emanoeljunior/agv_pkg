@@ -30,12 +30,25 @@ GYRO_XOUT_H  = 0x43
 GYRO_YOUT_H  = 0x45
 GYRO_ZOUT_H  = 0x47
 
-class MPU6050():
+class MPU6050(object):
     
-    def __init__():
+    def __init__(self):
         # MPU6050 configuration
         bus.write_byte_data(Device_Address, SMPLRT_DIV, 0)
         bus.write_byte_data(Device_Address, PWR_MGMT_1, 1)
         bus.write_byte_data(Device_Address, CONFIG, 0)
         bus.write_byte_data(Device_Address, GYRO_CONFIG, 24)
         bus.write_byte_data(Device_Address, INT_ENABLE, 0)
+        
+    def read_raw_data(addr):
+	      #Accelero and Gyro value are 16-bit
+        high = bus.read_byte_data(Device_Address, addr)
+        low = bus.read_byte_data(Device_Address, addr+1)
+
+        #concatenate higher and lower value
+        value = ((high << 8) | low)
+
+        #to get signed value from mpu6050
+        if(value > 32768):
+                value = value - 65536
+        return value
