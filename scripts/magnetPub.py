@@ -17,10 +17,13 @@ def compass():
         magnetometer = Point(d[0],d[1],d[2])
         pub.publish(magnetometer)
         rate.sleep()
+        
+def end_compass():
+    sensor.bus.close()
 
 if __name__ == '__main__':
     try:
-        rospy.on_shutdown(sensor.bus.close)
+        rospy.on_shutdown(end_compass)
         compass()
     except rospy.ROSInterruptException:
         pass        
