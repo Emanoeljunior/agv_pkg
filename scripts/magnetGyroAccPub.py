@@ -33,6 +33,6 @@ if __name__ == '__main__':
     rate = rospy.Rate(10)  # 60hz
 
     while not rospy.is_shutdown():
-        # acc_gyro_read_pub(acc_gyro)
+        acc_gyro_read_pub(acc_gyro)
         compass_read_pub(compass)
         rate.sleep()
