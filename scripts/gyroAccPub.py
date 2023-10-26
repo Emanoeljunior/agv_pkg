@@ -20,7 +20,7 @@ def read_raw_data(addr):
 
 if __name__ == '__main__':
     bus = smbus.SMBus(1)
-    rospy.on_shutdown(bus.close())
+    rospy.on_shutdown(bus.close)
     Device_Address = 0x68
 
     # Register addresses 
