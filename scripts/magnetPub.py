@@ -20,7 +20,7 @@ def compass():
 
 if __name__ == '__main__':
     try:
+        rospy.on_shutdown(sensor.bus.close)
         compass()
     except rospy.ROSInterruptException:
-        sensor.bus.close()
-        print "exit successfully"        
+        pass        
