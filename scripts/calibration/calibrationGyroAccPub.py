@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-
+# -*- coding: UTF-8 -*-
 import smbus	
 import rospy
 from geometry_msgs.msg import Point
