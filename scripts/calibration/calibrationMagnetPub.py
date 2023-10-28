@@ -12,7 +12,7 @@ def end():
 
 def compass():
     magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
-    magnet_bearing_pub = rospy.Publisher('magnet_bearning', PoinFloat64t, queue_size=10)
+    magnet_bearing_pub = rospy.Publisher('magnet_bearning', Float64, queue_size=10)
     rospy.init_node('compass', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
