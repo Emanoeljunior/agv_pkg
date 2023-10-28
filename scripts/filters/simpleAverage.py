@@ -26,8 +26,6 @@ class SimpleAverage :
         
         self.pub_k.publish(self.k)
         self.pub.publish(self.mean)
-        print(((k-1)/k)*mean.x)
-        print((1/k)*data.x)
         self.k += 1
         
     
