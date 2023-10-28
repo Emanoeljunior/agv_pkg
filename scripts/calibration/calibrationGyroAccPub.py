@@ -54,9 +54,9 @@ if __name__ == '__main__':
         gyro_x = read_raw_data(GYRO_XOUT_H)
         gyro_y = read_raw_data(GYRO_YOUT_H)
         gyro_z = read_raw_data(GYRO_ZOUT_H)	
-        Ax = (acc_x/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768
-        Ay = (acc_y/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768     
-        Az = (acc_z/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768	
+        Ax = (acc_x/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Ax[m/s²]
+        Ay = (acc_y/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Ay[m/s²]    
+        Az = (acc_z/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Az[m/s²]	
         Gx = gyro_x/131.0
         Gy = gyro_y/131.0
         Gz = gyro_z/131.0
