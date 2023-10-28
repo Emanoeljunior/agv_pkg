@@ -2,11 +2,11 @@
 import smbus	
 import time	
 import rospy
-import qmc5883l
+import py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 
-sensor = qmc5883l.QMC5883L()
+sensor = py_qmc5883l.QMC5883L()
 
 def compass():
     magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)

@@ -4,7 +4,7 @@ import smbus
 import rospy
 from geometry_msgs.msg import Point
 import py_mpu6050
-import qmc5883l
+import py_qmc5883l
 
 def compass_read_pub(compass):
     pub = rospy.Publisher('magnet', Point, queue_size=10)
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     bus = smbus.SMBus(1)
     rospy.on_shutdown(end)
     acc_gyro = py_mpu6050.MPU6050(bus)
-    compass = qmc5883l.QMC5883L(bus)
+    compass = py_qmc5883l.QMC5883L(bus)
     
     # ROS LOOP
     rospy.init_node("Sensors")
