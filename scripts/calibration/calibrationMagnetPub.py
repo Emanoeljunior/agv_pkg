@@ -6,7 +6,9 @@ import py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 
-sensor = py_qmc5883l.QMC5883L()
+def end():
+    print "Exited calibration"
+    bus.close()
 
 def compass():
     magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
@@ -19,11 +21,13 @@ def compass():
         magnetometer = Point(d[0],d[1],d[2])
         magnet_pub.publish(magnetometer)
         magnet_bearing_pub.publish(bearing)
-        
         rate.sleep()
 
 if __name__ == '__main__':
     try:
+        bus = smbus.SMBus(1)
+        sensor = py_qmc5883l.QMC5883L(bus)
+        rospy.on_shutdown(end)
         compass()
     except rospy.ROSInterruptException:
         pass        
