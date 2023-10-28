@@ -2,6 +2,7 @@
 
 import rospy
 from geometry_msgs.msg import Point
+from std_msgs.msg import Int64
 from matplotlib import pyplot as plt
 
 
@@ -12,6 +13,7 @@ class SimpleAverage :
         self.mean = Point(0,0,0)
         self.sub = rospy.Subscriber(sub, Point, self.simple_avarage, queue_size = 20)
         self.pub = rospy.Publisher(pub, Point, queue_size=20)
+        self.pub_k = rospy.Publisher('/average/k', Int64, queue_size=20)
 
     def simple_avarage(self, data):
         # Just to simplify notation
@@ -21,10 +23,11 @@ class SimpleAverage :
         self.mean.x += ((k-1)/k)*mean.x + (1/k)*data.x
         self.mean.y += ((k-1)/k)*mean.y + (1/k)*data.y
         self.mean.z += ((k-1)/k)*mean.z + (1/k)*data.z
+        
+        self.pub_k.publish(self.k)
+        self.pub.publish(self.mean)
         self.k += 1
         
-
-        self.pub.publish(self.mean)
     
 
 if __name__ == '__main__':
