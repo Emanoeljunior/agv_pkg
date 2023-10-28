@@ -20,12 +20,14 @@ class SimpleAverage :
         k = self.k
         mean = self.mean
         
-        self.mean.x += ((k-1)/k)*mean.x + (1/k)*data.x
-        self.mean.y += ((k-1)/k)*mean.y + (1/k)*data.y
-        self.mean.z += ((k-1)/k)*mean.z + (1/k)*data.z
+        self.mean.x = ((k-1)/k)*mean.x + (1/k)*data.x
+        self.mean.y = ((k-1)/k)*mean.y + (1/k)*data.y
+        self.mean.z = ((k-1)/k)*mean.z + (1/k)*data.z
         
         self.pub_k.publish(self.k)
         self.pub.publish(self.mean)
+        print(((k-1)/k)*mean.x)
+        print((1/k)*data.x)
         self.k += 1
         
     
