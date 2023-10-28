@@ -2,7 +2,7 @@
 import smbus	
 import time	
 import rospy
-import py_qmc5883l
+import foxbot.py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 
