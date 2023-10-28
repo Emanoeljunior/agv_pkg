@@ -5,14 +5,13 @@ from geometry_msgs.msg import Point
 from matplotlib import pyplot as plt
 
 
-class GyroAccc :
+class MovingAverage :
     
     def __init__ (self, sub, pub):
         self.points = []
-        # self.counter = 0
         self.mean = Point(0,0,0)
-        self.gyro_acc_sub = rospy.Subscriber(sub, Point, self.moving_avarage, queue_size = 20)
-        self.gyro_mean_pub = rospy.Publisher(pub, Point, queue_size=20)
+        self.sub = rospy.Subscriber(sub, Point, self.moving_avarage, queue_size = 20)
+        self.pub = rospy.Publisher(pub, Point, queue_size=20)
 
     def moving_avarage(self, data):
         self.points.append(data)
@@ -26,26 +25,14 @@ class GyroAccc :
             self.mean.x = sum(point.x for point in self.points)/len(self.points)
             self.mean.y = sum(point.y for point in self.points)/len(self.points)
             self.mean.z = sum(point.z for point in self.points)/len(self.points)
-        # print("Report")
-        # print("Length:", len(self.points))
-        # print("Mean", self.mean)
-        self.gyro_mean_pub.publish(self.mean)
-        self.plot_x(self.mean)
-    
-    # def plot_x(self,msg):
-    #     if self.counter % 2 == 0:
-    #         plt.plot(msg.y, msg.x, '*')
-    #         plt.axis("equal")
-    #         plt.draw()
-    #         plt.pause(0.00000000001)
 
-    #     self.counter += 1
-        
+        self.pub.publish(self.mean)
+    
 
 if __name__ == '__main__':
     try:
         rospy.init_node("acc_filter")
-        GyroAccc("/gyroscope_publisher","/gyroscope_mean_publisher")
+        MovingAverage("/gyroscope_publisher","/gyroscope_mean_publisher")
         rospy.spin()
     except rospy.ROSInterruptException:
         pass
