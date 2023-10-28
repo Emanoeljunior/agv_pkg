@@ -3,6 +3,7 @@
 import smbus	
 import rospy
 from geometry_msgs.msg import Point
+import py_mpu6050
 
 def end():
     print "Exited calibration Accelerometer and gyroscope"
