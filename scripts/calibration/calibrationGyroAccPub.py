@@ -4,6 +4,10 @@ import smbus
 import rospy
 from geometry_msgs.msg import Point
 
+def end():
+    print "Exited calibration Accelerometer and gyroscope"
+    bus.close()
+
 def read_raw_data(addr):
 	#Accelero and Gyro value are 16-bit -> [0-65536]
         high = bus.read_byte_data(Device_Address, addr)
@@ -20,6 +24,7 @@ def read_raw_data(addr):
 
 if __name__ == '__main__':
     bus = smbus.SMBus(1)
+    rospy.on_shutdown(end)
     Device_Address = 0x68
 
     # Register addresses 

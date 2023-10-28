@@ -7,7 +7,7 @@ from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 
 def end():
-    print "Exited calibration"
+    print "Exited calibration magnet"
     bus.close()
 
 def compass():
