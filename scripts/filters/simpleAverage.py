@@ -15,7 +15,7 @@ class SimpleAverage :
 
     def simple_avarage(self, data):
         self.k += 1
-
+        k = self.k
         self.mean.x += ((k-1)/k)*mean.x + (1/k)*data.x
         self.mean.y += ((k-1)/k)*mean.y + (1/k)*data.y
         self.mean.z += ((k-1)/k)*mean.z + (1/k)*data.z
