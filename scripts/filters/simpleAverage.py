@@ -10,7 +10,7 @@ class SimpleAverage :
     def __init__ (self, sub, pub):
         self.k = 0
         self.mean = Point(0,0,0)
-        self.sub = rospy.Subscriber(sub, Point, self.moving_avarage, queue_size = 20)
+        self.sub = rospy.Subscriber(sub, Point, self.simple_avarage, queue_size = 20)
         self.pub = rospy.Publisher(pub, Point, queue_size=20)
 
     def simple_avarage(self, data):
