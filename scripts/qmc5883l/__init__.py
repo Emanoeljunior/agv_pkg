@@ -4,8 +4,8 @@ Python driver for the QMC5883L 3-Axis Magnetic Sensor.
 
 Usage example:
 
-  import py_qmc5883l
-  sensor = py_qmc5883l.QMC5883L()
+  import qmc5883l
+  sensor = qmc5883l.QMC5883L()
   m = sensor.get_magnet()
   print(m)
 
