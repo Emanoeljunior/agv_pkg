@@ -11,7 +11,7 @@ Usage example:
   print(acc, gyro)
 
 you will get three 16 bit signed integers, representing the values
-of the Accelerometer(acc) and Gyroscope(gyro) sensor on axis X, Y and Z, e.g. acc = [-1257, 940, -4970].
+of the Accelerometer(acc) and Gyroscope(gyro) sensor on axis X, Y and Z, e.g. acc = [-0.90, 1.20, 9.81].
 """
     
 
@@ -67,12 +67,12 @@ class MPU6050(object):
         gyro_y = self.read_raw_data(GYRO_YOUT_H)
         gyro_z = self.read_raw_data(GYRO_ZOUT_H)
         
-        Ax = (acc_x/16384.0-0.101778)*9.81 #16384 -> 1g 
-        Ay = (acc_y/16384.0+0.007739)*9.81
-        Az = (acc_z/16384.0-0.987720)*9.81	
-        Gx = gyro_x/131.0
-        Gy = gyro_y/131.0
-        Gz = gyro_z/131.0
+        Ax = (acc_x/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Ax[m/s²]
+        Ay = (acc_y/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Ay[m/s²]    
+        Az = (acc_z/16384.0)*9.8  # 9.8 = 1g -> Scale is set in 2g = 32768 and -2g = -32768 -> Az[m/s²]	
+        Gx = gyro_x/131.0 # -> Scale is set in 250°/s = 32768 and -250°/s = -32768 -> Gx[degres/s]
+        Gy = gyro_y/131.0 # -> Scale is set in 250°/s = 32768 and -250°/s = -32768 -> Gy[degres/s]
+        Gz = gyro_z/131.0 # -> Scale is set in 250°/s = 32768 and -250°/s = -32768 -> Gz[degres/s]
         
         return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
     

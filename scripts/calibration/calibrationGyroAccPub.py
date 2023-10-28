@@ -5,7 +5,7 @@ import rospy
 from geometry_msgs.msg import Point
 
 def read_raw_data(addr):
-	#Accelero and Gyro value are 16-bit
+	#Accelero and Gyro value are 16-bit -> [0-65536]
         high = bus.read_byte_data(Device_Address, addr)
         low = bus.read_byte_data(Device_Address, addr+1)
 
