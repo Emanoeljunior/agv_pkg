@@ -17,6 +17,7 @@ def compass():
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
         d = sensor.get_data()
+        print(d)
         bearing = sensor.get_bearing_raw()
         magnetometer = Point(d[0],d[1],d[2])
         magnet_pub.publish(magnetometer)
