@@ -11,7 +11,7 @@ class Calibration():
     def __init__(self):
         self.max = Point(0,0,0)
         self.min = Point(0,0,0)
-        self.ofsset = Point(0,0,0)
+        self.offset = Point(0,0,0)
         
         rospy.init_node('compass', anonymous=True)
         
