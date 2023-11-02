@@ -14,7 +14,9 @@ class Calibration():
         self.ofsset = Point(0,0,0)
 
     def get_offset(self, data):
-        if data["x"] > self.max["x"]
+        if data.x > self.max.x:
+            self.max.x = data.x
+        print(self.max.x)
 
     def compass(self, sensor):
         magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
