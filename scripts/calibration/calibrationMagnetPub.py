@@ -8,15 +8,15 @@ from std_msgs.msg import Float64
 
 class Calibration():
     
-    def __init__:
+    def __init__(self):
         self.max = Point(0,0,0)
         self.min = Point(0,0,0)
         self.ofsset = Point(0,0,0)
 
-    def get_offset(data: Point):
+    def get_offset(self, data: Point):
         if data.x > self.max.x
 
-    def compass(sensor):
+    def compass(self, sensor):
         magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
         magnet_bearing_pub = rospy.Publisher('magnet_bearning', Float64, queue_size=10)
         rospy.init_node('compass', anonymous=True)
@@ -30,7 +30,7 @@ class Calibration():
             magnet_pub.publish(magnetometer)
             magnet_bearing_pub.publish(bearing)
             rate.sleep()
-    def end():
+    def end(self):
         print "Exited calibration magnet"
         bus.close()
         
