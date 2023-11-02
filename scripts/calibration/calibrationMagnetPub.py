@@ -20,6 +20,7 @@ class Calibration():
         
         self.magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
         self.magnet_bearing_pub = rospy.Publisher('magnet_bearning', Float64, queue_size=10)
+        self.magnet_calibrated_pub = rospy.Publisher('magnet_calibrated', Float64, queue_size=10)
         
         self.magnet_max_pub = rospy.Publisher('magnet_max', Point, queue_size=10)
         self.magnet_min_pub = rospy.Publisher('magnet_min', Point, queue_size=10)
@@ -55,13 +56,14 @@ class Calibration():
         rate = rospy.Rate(10) # 10hz
         print("Running..")
         while not rospy.is_shutdown():
-            d_raw = sensor.get_data()
+            d = sensor.get_data()
             bearing = sensor.get_bearing_raw()
-            d = self.calibrated(d_raw[:3])
+            calibrated = self.calibrated(d[:3])
             magnetometer = Point(d[0],d[1],d[2])
             self.get_offset(magnetometer)
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
+            self.magnet_calibrated_pub.publish(calibrated)
             rate.sleep()
     def end(self):
         print("Max ", self.max)
