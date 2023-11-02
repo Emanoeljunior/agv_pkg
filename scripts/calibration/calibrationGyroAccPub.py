@@ -26,7 +26,7 @@ if __name__ == '__main__':
     acc_gyro = py_mpu6050.MPU6050(bus)
     
     rospy.init_node("MPU6050_CALIBRATION")
-    rate = rospy.Rate(60)
+    rate = rospy.Rate(2) #Put 60 as default
     # ROS LOOP
     while not rospy.is_shutdown(): 
         acc_gyro_read_pub(acc_gyro)
