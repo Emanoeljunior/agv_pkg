@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import time	
 import rospy
 from geometry_msgs.msg import Point
@@ -11,7 +11,7 @@ class Trajectory():
     def __init__(self):
         rospy.init_node('trajectory', anonymous=True)
         
-        self.ref_pub = rospy.Publisher('reference', geometry_msgs.msg.Point, queue_size=10)
+        self.ref_pub = rospy.Publisher('reference', Point, queue_size=10)
         self.br = tf.TransformBroadcaster()
 
     def reference(self):
