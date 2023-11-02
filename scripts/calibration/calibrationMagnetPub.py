@@ -20,7 +20,7 @@ class Calibration():
         
         self.magnet_pub = rospy.Publisher('magnet', Point, queue_size=10)
         self.magnet_bearing_pub = rospy.Publisher('magnet_bearning', Float64, queue_size=10)
-        self.magnet_calibrated_pub = rospy.Publisher('magnet_calibrated', Float64, queue_size=10)
+        self.magnet_calibrated_pub = rospy.Publisher('magnet_calibrated', Point, queue_size=10)
         
         self.magnet_max_pub = rospy.Publisher('magnet_max', Point, queue_size=10)
         self.magnet_min_pub = rospy.Publisher('magnet_min', Point, queue_size=10)
