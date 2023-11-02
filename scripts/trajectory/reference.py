@@ -36,7 +36,7 @@ if __name__ == '__main__':
     try:
         trajectory = Trajectory()
         while not rospy.is_shutdown():
-            self.reference()
+            trajectory.reference()
             rate.sleep()
 
     except rospy.ROSInterruptException:
