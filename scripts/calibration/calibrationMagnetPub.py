@@ -58,8 +58,9 @@ class Calibration():
         while not rospy.is_shutdown():
             d = sensor.get_data()
             bearing = sensor.get_bearing_raw()
-            calibrated = self.calibrated(d[:3])
             magnetometer = Point(d[0],d[1],d[2])
+            d_c = self.calibrated(d[:3])
+            calibrated = Point(d_c[0],d_c[1],d_c[2])
             self.get_offset(magnetometer)
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
