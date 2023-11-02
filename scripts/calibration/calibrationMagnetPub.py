@@ -52,9 +52,9 @@ class Calibration():
     def compass(self, sensor):
        
         rate = rospy.Rate(10) # 10hz
+        print("Running..")
         while not rospy.is_shutdown():
             d = sensor.get_data()
-            print(d)
             bearing = sensor.get_bearing_raw()
             magnetometer = Point(d[0],d[1],d[2])
             self.get_offset(magnetometer)
@@ -62,6 +62,9 @@ class Calibration():
             self.magnet_bearing_pub.publish(bearing)
             rate.sleep()
     def end(self):
+        print("Max ", self.max)
+        print("Min ", self.min)
+        print("Offset ", self.offset)
         print "Exited calibration magnet"
         bus.close()
         
