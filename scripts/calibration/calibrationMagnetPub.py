@@ -5,7 +5,7 @@ import rospy
 import py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
-import tf
+import tf2
 import math
 
 class Calibration():
@@ -27,7 +27,7 @@ class Calibration():
         self.magnet_offset_pub = rospy.Publisher('magnet_offset', Point, queue_size=10)
         
         self.ref_pub = rospy.Publisher('reference', geometry_msgs.msg.Point, queue_size=10)
-        self.br = tf.TransformBroadcaster()
+        self.br = tf2.TransformBroadcaster()
 
 
     def get_offset(self, data):
@@ -65,6 +65,7 @@ class Calibration():
             self.get_offset(magnetometer)
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
+            self.reference()
             rate.sleep()
     def end(self):
         print("Max ", self.max)
