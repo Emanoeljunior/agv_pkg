@@ -9,8 +9,10 @@ from std_msgs.msg import Float64
 class Calibration():
     
     def __init__(self):
-        self.max = Point(0,0,0)
-        self.min = Point(0,0,0)
+        max = 0b0111_1111_1111_1111 # Max for signed 16 bits sensor
+        min = - 0b0111_1111_1111_1111 # Min for signed 16 bits sensor
+        self.max = Point(min,min,min) # Set max as min for start condition
+        self.min = Point(max,max,max)  # Set min as max for start condition
         self.offset = Point(0,0,0)
         
         rospy.init_node('compass', anonymous=True)
