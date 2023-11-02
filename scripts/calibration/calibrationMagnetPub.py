@@ -16,6 +16,8 @@ class Calibration():
     def get_offset(self, data):
         if data.x > self.max.x:
             self.max.x = data.x
+        print(dir(self.max))
+        print(dir(data))
         print(self.max.x)
 
     def compass(self, sensor):
