@@ -3,9 +3,9 @@ import smbus
 import time	
 import rospy
 import py_qmc5883l
+import numpy as np
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
-import math
 
 class Calibration():
     
@@ -55,8 +55,9 @@ class Calibration():
         rate = rospy.Rate(10) # 10hz
         print("Running..")
         while not rospy.is_shutdown():
-            d = sensor.get_data()
+            d_raw = sensor.get_data()
             bearing = sensor.get_bearing_raw()
+            d = self.calibrated(d_raw)
             magnetometer = Point(d[0],d[1],d[2])
             self.get_offset(magnetometer)
             self.magnet_pub.publish(magnetometer)
@@ -68,6 +69,20 @@ class Calibration():
         print("Offset ", self.offset)
         print "Exited calibration magnet"
         bus.close()
+        
+    def calibrated(self, data):
+        A_1 = np.array(
+            [[ 4.76866947e-04 -4.37837702e-05  8.53207761e-06],
+             [-4.37837702e-05  4.10810171e-04  2.64700533e-05],
+             [ 8.53207761e-06  2.64700533e-05  6.27099022e-04]])
+        b = np.array(
+            [[5883.81126487],
+             [1589.87634706],
+             [1286.28382399]]
+        )
+        s = np.array(data).reshape(3, 1)
+        s = np.dot(A_1, s - b)
+        return [s[0,0], s[1,0], s[2,0]]
 
 
 if __name__ == '__main__':
