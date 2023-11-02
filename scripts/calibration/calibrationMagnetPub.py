@@ -6,6 +6,7 @@ import py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
 import tf
+import math
 
 class Calibration():
     
@@ -72,7 +73,7 @@ class Calibration():
         print "Exited calibration magnet"
         bus.close()
         
-    def reference(self)
+    def reference(self):
         # Doing the circle reference         
         t = rospy.Time.now().to_sec() * math.pi            
         x = 2.0 * math.cos(t/70)            
@@ -83,7 +84,7 @@ class Calibration():
         rospy.Time.now(),
         "reference",
         "odom")      # Send the reference into topic                  
-        reference = geometry_msgs.msg.Point()            
+        reference = Point()            
         reference.x = x            
         reference.y = y            
         self.ref_pub.publish(reference) 
