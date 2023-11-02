@@ -5,6 +5,7 @@ import rospy
 import py_qmc5883l
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
+import tf
 
 class Calibration():
     
@@ -23,6 +24,9 @@ class Calibration():
         self.magnet_max_pub = rospy.Publisher('magnet_max', Point, queue_size=10)
         self.magnet_min_pub = rospy.Publisher('magnet_min', Point, queue_size=10)
         self.magnet_offset_pub = rospy.Publisher('magnet_offset', Point, queue_size=10)
+        
+        self.ref_pub = rospy.Publisher('reference', geometry_msgs.msg.Point, queue_size=10)
+        self.br = tf.TransformBroadcaster()
 
 
     def get_offset(self, data):
@@ -67,6 +71,22 @@ class Calibration():
         print("Offset ", self.offset)
         print "Exited calibration magnet"
         bus.close()
+        
+    def reference(self)
+        # Doing the circle reference         
+        t = rospy.Time.now().to_sec() * math.pi            
+        x = 2.0 * math.cos(t/70)            
+        y = 2.0 * math.sin(t/70)      # Create a child frame of odom for see the reference in RVIZ           
+        self.br.sendTransform(
+        [ x, y, 0.0],                            
+        [0.0, 0.0, 0.0, 1.0],
+        rospy.Time.now(),
+        "reference",
+        "odom")      # Send the reference into topic                  
+        reference = geometry_msgs.msg.Point()            
+        reference.x = x            
+        reference.y = y            
+        self.ref_pub.publish(reference) 
         
 
 
