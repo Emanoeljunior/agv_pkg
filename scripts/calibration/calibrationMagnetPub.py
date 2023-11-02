@@ -13,7 +13,7 @@ class Calibration():
         self.min = Point(0,0,0)
         self.ofsset = Point(0,0,0)
 
-    def get_offset(self, data: Point):
+    def get_offset(self, data):
         if data.x > self.max.x
 
     def compass(self, sensor):
