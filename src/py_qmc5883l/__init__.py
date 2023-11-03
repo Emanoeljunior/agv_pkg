@@ -191,13 +191,13 @@ class QMC5883L(object):
             return None
         else:
             b = math.degrees(math.atan2(y, x))
-            if b < 0:
-                b += 360.0
-            b += self._declination
-            if b < 0.0:
-                b += 360.0
-            elif b >= 360.0:
-                b -= 360.0
+            # if b < 0:
+            #     b += 360.0
+            # b += self._declination
+            # if b < 0.0:
+            #     b += 360.0
+            # elif b >= 360.0:
+            #     b -= 360.0
         return b
 
     def get_temp(self):
