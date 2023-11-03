@@ -57,10 +57,10 @@ class Calibration():
         print("Running..")
         while not rospy.is_shutdown():
             d = sensor.get_data()
-            bearing = sensor.get_bearing_raw()
             magnetometer = Point(d[0],d[1],d[2])
             d_c = self.calibrated(d[:3])
             calibrated = Point(d_c[0],d_c[1],d_c[2])
+            bearing = sensor.get_bearing(d_c[0],d_c[1])
             self.get_offset(magnetometer)
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
@@ -75,9 +75,9 @@ class Calibration():
         
     def calibrated(self, data):
         A_1 = np.array(
-            [[ 3.47544601e-03, -9.31171840e-07, -8.71559471e-06],
-             [-9.31171840e-07,  3.26957519e-03,  1.87713564e-05],
-             [-8.71559471e-06,  1.87713564e-05,  3.95850480e-03]])
+            [[ 3.47544601e-04, -9.31171840e-07, -8.71559471e-06],
+             [-9.31171840e-07,  3.26957519e-04,  1.87713564e-05],
+             [-8.71559471e-06,  1.87713564e-05,  3.95850480e-04]])
         b = np.array(
             [[5547.74334509],
              [ 0],
