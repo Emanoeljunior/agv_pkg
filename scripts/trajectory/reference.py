@@ -3,7 +3,6 @@ import time
 import rospy
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
-import tf
 import math
 
 class Trajectory():
@@ -12,19 +11,12 @@ class Trajectory():
         rospy.init_node('trajectory', anonymous=True)
         
         self.ref_pub = rospy.Publisher('reference', Point, queue_size=10)
-        self.br = tf.TransformBroadcaster()
 
     def reference(self):
         # Doing the circle reference         
-        t = rospy.Time.now().to_sec() * math.pi            
-        x = 2.0 * math.cos(t/70)            
-        y = 2.0 * math.sin(t/70)      # Create a child frame of odom for see the reference in RVIZ           
-        self.br.sendTransform(
-        [ x, y, 0.0],                            
-        [0.0, 0.0, 0.0, 1.0],
-        rospy.Time.now(),
-        "reference",
-        "odom")      # Send the reference into topic                  
+        t = rospy.Time.now().to_sec() * math.pi*10           
+        x = 1.0 * math.cos(t/70)            
+        y = 1.0 * math.sin(t/70)               
         reference = Point()            
         reference.x = x            
         reference.y = y            
@@ -35,6 +27,7 @@ class Trajectory():
 if __name__ == '__main__':
     try:
         trajectory = Trajectory()
+        rate = rospy.Rate(10)  # 10hz
         while not rospy.is_shutdown():
             trajectory.reference()
             rate.sleep()
