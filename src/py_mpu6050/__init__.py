@@ -78,7 +78,7 @@ class MPU6050(object):
         return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
     
     def get_roll_pitch(self, acc):
-        roll = np.arctan2(acc["y"], acc["z"] + 0.05*acc["x"])
+        roll = np.arctan2(acc["y"], acc["z"])
         pitch = np.arctan2(-1*acc["x"], np.sqrt(np.square(acc["y"]) + np.square(acc["z"]) ))
         roll = np.degrees(roll)
         pitch = np.degrees(pitch)
