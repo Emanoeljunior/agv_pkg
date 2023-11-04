@@ -14,6 +14,7 @@ you will get three 16 bit signed integers, representing the values
 of the Accelerometer(acc) and Gyroscope(gyro) sensor on axis X, Y and Z, e.g. acc = [-0.90, 1.20, 9.81].
 """
     
+import numpy as np
 
 Device_Address = 0x68
 
