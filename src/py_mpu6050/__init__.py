@@ -61,6 +61,22 @@ class MPU6050(object):
         return value
     
     def get_data(self):
+        """
+		Read measurements from accelerometer and gyroscope
+  
+        Configuration
+        -------
+        Accelerometer with 2g (2 gravity) of range
+        and 16 bits.
+        Gyroscope with 250°/s (250 degres per second) of range
+        and 16 bits.
+		Returns
+		-------
+		acc: dict["x": float,"y": float,"z": float]
+				    Acceleration from each axis in m/s²
+		gyro: dict["x": float,"y": float,"z": float]
+					Angular velocity from each axis in degress/s
+		"""
         acc_x = self.read_raw_data(ACCEL_XOUT_H)
         acc_y = self.read_raw_data(ACCEL_YOUT_H)
         acc_z = self.read_raw_data(ACCEL_ZOUT_H)	
@@ -78,10 +94,30 @@ class MPU6050(object):
         return {"x":Ax,"y":Ay, "z":Az}, {"x":Gx, "y":Gy, "z":Gz}
     
     def get_roll_pitch(self, acc):
-        roll = np.arctan2(acc["y"], acc["z"])
-        pitch = np.arctan2(-1*acc["x"], np.sqrt(np.square(acc["y"]) + np.square(acc["z"]) ))
-        roll = np.degrees(roll)
-        pitch = np.degrees(pitch)
+        """
+		Computes measured roll and pitch from accelerometer
+        source: https://medium.com/@niru5/intro-to-inertial-measurement-unit-imu-part-1-47f19fc7d68d
+  
+
+		Parameters
+		----------
+		ax: float 
+			acceleration in x axis
+		ay: float 
+			acceleration in y axis
+		az: float 
+			acceleration in z axis
+
+		Returns
+		-------
+		roll: float
+					It is estimated roll from sensor values
+		pitch: float
+					It is estimated pitch from sensor values
+
+		"""
+        roll = np.degrees(np.arctan2(acc["y"], acc["z"]))
+        pitch = np.degrees(np.arctan2(-1*acc["x"], np.sqrt(np.square(acc["y"]) + np.square(acc["z"]) )))
         return roll, pitch
     
     def __del__(self):
