@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# import rosbag
+import rosbag
 import smbus	
 import time	
 import rospy
@@ -16,7 +16,7 @@ class Calibration():
         self.max = Point(min,min,min) # Set max as min for start condition
         self.min = Point(max,max,max)  # Set min as max for start condition
         self.offset = Point(0,0,0)
-        # self.bag = rosbag.Bag('magnetometer_calibration.bag', 'w')
+        self.bag = rosbag.Bag('magnetometer_calibration.bag', 'w')
         
         rospy.init_node('compass', anonymous=True)
         
@@ -76,7 +76,7 @@ class Calibration():
         print("Min ", self.min)
         print("Offset ", self.offset)
         print "Exited calibration magnet"
-        # bag.close()
+        bag.close()
         
         bus.close()
         
