@@ -16,6 +16,7 @@ class Calibration():
         self.max = Point(min,min,min) # Set max as min for start condition
         self.min = Point(max,max,max)  # Set min as max for start condition
         self.offset = Point(0,0,0)
+        self.bag = rosbag.Bag('magnetometer_calibration.bag', 'w')
         
         rospy.init_node('compass', anonymous=True)
         
@@ -56,7 +57,7 @@ class Calibration():
        
         rate = rospy.Rate(10) # 10hz
         print("Running..")
-        bag = rosbag.Bag('magnetometer_calibration.bag', 'w')
+        
 
         while not rospy.is_shutdown():
             d = sensor.get_data()
@@ -68,16 +69,15 @@ class Calibration():
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
             self.magnet_calibrated_pub.publish(calibrated)
-            try:
-                bag.write('magnet_pub', magnetometer)
-            finally:
-                bag.close()
+            self.bag.write('magnet_pub_bag', magnetometer)
             rate.sleep()
     def end(self):
         print("Max ", self.max)
         print("Min ", self.min)
         print("Offset ", self.offset)
         print "Exited calibration magnet"
+        bag.close()
+        
         bus.close()
         
     def calibrated(self, data):
