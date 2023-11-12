@@ -1,5 +1,5 @@
-# import rosbag
 #!/usr/bin/env python2
+# import rosbag
 import smbus	
 import time	
 import rospy
