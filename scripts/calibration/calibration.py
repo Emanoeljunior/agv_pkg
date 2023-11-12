@@ -45,7 +45,7 @@ class Magnetometer():
     def calibrate(self, data):
         ''' Performs calibration. '''
 
-        if len(self.s) < 500:
+        if len(self.s) < 1000:
             self.first = False
             stop_condition = rospy.Time.now() + rospy.Duration(60)
             self.s.append([data.x, data.y, data.z])
