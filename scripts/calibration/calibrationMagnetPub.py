@@ -7,7 +7,6 @@ import py_qmc5883l
 import numpy as np
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
-from std_msgs.msg import Int32, String
 
 class Calibration():
     
