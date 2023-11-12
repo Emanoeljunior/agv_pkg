@@ -76,7 +76,7 @@ class Calibration():
         print("Min ", self.min)
         print("Offset ", self.offset)
         print "Exited calibration magnet"
-        bag.close()
+        self.bag.close()
         
         bus.close()
         
