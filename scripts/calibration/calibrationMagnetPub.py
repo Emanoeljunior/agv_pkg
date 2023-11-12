@@ -1,3 +1,4 @@
+import rosbag
 #!/usr/bin/env python2
 import smbus	
 import time	
@@ -6,6 +7,7 @@ import py_qmc5883l
 import numpy as np
 from geometry_msgs.msg import Point
 from std_msgs.msg import Float64
+from std_msgs.msg import Int32, String
 
 class Calibration():
     
@@ -55,6 +57,8 @@ class Calibration():
        
         rate = rospy.Rate(10) # 10hz
         print("Running..")
+        bag = rosbag.Bag('magnetometer_calibration.bag', 'w')
+
         while not rospy.is_shutdown():
             d = sensor.get_data()
             magnetometer = Point(d[0],d[1],d[2])
@@ -65,6 +69,10 @@ class Calibration():
             self.magnet_pub.publish(magnetometer)
             self.magnet_bearing_pub.publish(bearing)
             self.magnet_calibrated_pub.publish(calibrated)
+            try:
+                bag.write('magnet_pub', magnetometer)
+            finally:
+                bag.close()
             rate.sleep()
     def end(self):
         print("Max ", self.max)
