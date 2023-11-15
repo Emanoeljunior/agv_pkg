@@ -19,6 +19,9 @@ class Motor :
         self.pin1 = pin1
         self.pin2 = pin2
         self.pinEn = pinEn
+        print "sub"
+        print sub
+        
         self.motor_sub = rospy.Subscriber(sub, Float64, self.updateMotorCallback, queue_size = 10)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin1, GPIO.OUT)
