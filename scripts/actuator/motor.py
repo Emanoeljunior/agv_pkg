@@ -39,9 +39,8 @@ class Motor :
         self.Motor_pwm.ChangeDutyCycle(self.duty)
 
 if __name__ == '__main__':
-	print "Starting motors"
-    
     try:
+        print "Starting motor"
         rospy.init_node("motor_node")
         #left motor
         A1 = 16
@@ -53,6 +52,7 @@ if __name__ == '__main__':
         BEn = 19
         Motor(A1, A2, AEn, "/left_motor")
         Motor(B1, B2, BEn, "/right_motor")
+	    print "Motor started"
         rospy.spin()
     except rospy.ROSInterruptException:
         GPIO.cleanup()
