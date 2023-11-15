@@ -52,7 +52,7 @@ if __name__ == '__main__':
         BEn = 19
         Motor(A1, A2, AEn, "/left_motor")
         Motor(B1, B2, BEn, "/right_motor")
-	    print "Motor started"
+	print "Motor started"
         rospy.spin()
     except rospy.ROSInterruptException:
         GPIO.cleanup()
