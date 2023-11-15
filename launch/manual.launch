@@ -1,5 +1,0 @@
-<launch>
-    <node name="Manual" pkg="agv_pkg" type ="velManual" output="screen"/>
-  <!--  <node name="Motor" pkg="agv_pkg" type ="motor.py" output="screen"/> -->
-
-</launch>
