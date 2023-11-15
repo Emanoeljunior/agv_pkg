@@ -27,6 +27,7 @@ class Motor :
         self.Motor_pwm = GPIO.PWM(self.pinEn, 120)
         self.Motor_pwm.start(0)
     def updateMotorCallback(self, msg):
+        print "update callback"
         self.power = msg.data
         self.duty = abs(self.power)*100
         if self.power>0:
