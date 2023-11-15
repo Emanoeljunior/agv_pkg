@@ -19,9 +19,7 @@ class Motor :
         self.pin1 = pin1
         self.pin2 = pin2
         self.pinEn = pinEn
-        print "sub"
-        print sub
-        
+
         self.motor_sub = rospy.Subscriber(sub, Float64, self.updateMotorCallback, queue_size = 10)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.pin1, GPIO.OUT)
@@ -30,7 +28,6 @@ class Motor :
         self.Motor_pwm = GPIO.PWM(self.pinEn, 120)
         self.Motor_pwm.start(0)
     def updateMotorCallback(self, msg):
-        print "update callback"
         self.power = msg.data
         self.duty = abs(self.power)*100
         if self.power>0:
@@ -42,8 +39,9 @@ class Motor :
         self.Motor_pwm.ChangeDutyCycle(self.duty)
 
 if __name__ == '__main__':
+	print "Starting motors"
+    
     try:
-	print "hello"
         rospy.init_node("motor_node")
         #left motor
         A1 = 16
@@ -53,7 +51,6 @@ if __name__ == '__main__':
         B1 = 26
         B2 = 21
         BEn = 19
-	print "here"
         Motor(A1, A2, AEn, "/left_motor")
         Motor(B1, B2, BEn, "/right_motor")
         rospy.spin()
