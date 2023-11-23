@@ -32,11 +32,11 @@ class SensorsRead:
         gyroPub.publish(Gyro)
         accPub.publish(Acc)
     
-    def apply_kalman_filter(self, kalman_filter):
+    def apply_kalman_filter(self, sensorfusion):
         new_time = time.time()
 	dt = new_time - self.current_time
 	self.current_time = new_time
-        sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data["x"],self.acc_data["y"],self.acc_data["z"],self.gyro_data["x"],self.gyro_data["y"], self.gyro_data["z"],self.compass_data[0], self.compass_data[1], self.compass_data[2], dt)
+        sensorfusion.computeAndUpdateRollPitchYaw(self.acc_data["x"],self.acc_data["y"],self.acc_data["z"],self.gyro_data["x"],self.gyro_data["y"], self.gyro_data["z"],self.compass_data[0], self.compass_data[1], self.compass_data[2], dt)
         print "Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2}".format(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
         
         
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     compass = py_qmc5883l.QMC5883L(bus)
     current_time = time.time()
     sensors = SensorsRead(current_time)
-    sensor_fusion = kalman.Kalman()
+    sensorfusion = kalman.Kalman()
     
     # ROS LOOP
     rospy.init_node("Sensors")
@@ -60,5 +60,5 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         sensors.acc_gyro_read_pub(acc_gyro)
         sensors.compass_read_pub(compass)
-        sensors.apply_kalman_filter(sensor_fusion)
+        sensors.apply_kalman_filter(sensorfusion)
         rate.sleep()
