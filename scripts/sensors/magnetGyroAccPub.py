@@ -37,7 +37,7 @@ class SensorsRead:
 	    dt = new_time - self.current_time
 	    self.current_time = new_time
         sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data["x"],self.acc_data["y"],self.acc_data["z"],self.gyro_data["x"],self.gyro_data["y"], self.gyro_data["z"],self.magnet_data[0], self.magnet_data[1], self.magnet_data[2], dt)
-        print "Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2} ".format(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
+        print "Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2}".format(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
         
         
     
