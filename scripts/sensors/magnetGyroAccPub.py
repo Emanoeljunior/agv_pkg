@@ -32,9 +32,7 @@ class SensorsRead:
         accPub.publish(Acc)
     
     def apply_kalman_filter(self, kalman_filter):
-        sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data[0],self.acc_data[1],self.acc_data[2],
-                                                   self.gyro_data[0],self.gyro_data[1], self.gyro_data[2],
-                                                   self.magnet_data[0], self.magnet_data[1], self.magnet_data[2])
+        sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data[0],self.acc_data[1],self.acc_data[2],self.gyro_data[0],self.gyro_data[1], self.gyro_data[2],self.magnet_data[0], self.magnet_data[1], self.magnet_data[2])
         print "Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2} ".format(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
         
         
