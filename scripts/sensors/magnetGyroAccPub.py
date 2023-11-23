@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-
+import time
 import smbus	
 import rospy
 from geometry_msgs.msg import Point
@@ -9,7 +9,8 @@ import kalman
 
 class SensorsRead:
     
-    def __init__(self):
+    def __init__(self, current_time):
+        self.current_time = current_time
         self.compass_data = None
         self.acc_data = None
         self.gyro_data = None
@@ -32,7 +33,10 @@ class SensorsRead:
         accPub.publish(Acc)
     
     def apply_kalman_filter(self, kalman_filter):
-        sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data[0],self.acc_data[1],self.acc_data[2],self.gyro_data[0],self.gyro_data[1], self.gyro_data[2],self.magnet_data[0], self.magnet_data[1], self.magnet_data[2])
+        new_time = time.time()
+	    dt = new_time - self.current_time
+	    self.current_time = new_time
+        sensor_fusion.computeAndUpdateRollPitchYaw(self.acc_data[0],self.acc_data[1],self.acc_data[2],self.gyro_data[0],self.gyro_data[1], self.gyro_data[2],self.magnet_data[0], self.magnet_data[1], self.magnet_data[2], dt)
         print "Kalmanroll:{0} KalmanPitch:{1} KalmanYaw:{2} ".format(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
         
         
@@ -46,13 +50,13 @@ if __name__ == '__main__':
     rospy.on_shutdown(end)
     acc_gyro = py_mpu6050.MPU6050(bus)
     compass = py_qmc5883l.QMC5883L(bus)
-    sensors = SensorsRead()
+    current_time = time.time()
+    sensors = SensorsRead(current_time)
     sensor_fusion = kalman.Kalman()
     
     # ROS LOOP
     rospy.init_node("Sensors")
     rate = rospy.Rate(10)  # 60hz
-
     while not rospy.is_shutdown():
         sensors.acc_gyro_read_pub(acc_gyro)
         sensors.compass_read_pub(compass)
