@@ -18,7 +18,7 @@ class SensorsRead:
 
     def compass_read_pub(self, compass):
         pub = rospy.Publisher('magnet', Point, queue_size=10)
-        self.compass_data = compass.get_data()
+        self.compass_data = compass.get_calibrated_magnet_data()
         magnetometer = Point( self.compass_data[0], self.compass_data[1], self.compass_data[2])
         pub.publish(magnetometer)
 
