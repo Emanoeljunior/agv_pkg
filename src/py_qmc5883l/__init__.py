@@ -17,6 +17,7 @@ import logging
 import math
 import time
 import smbus
+import numpy as np
 
 DFLT_BUS = 1
 DFLT_ADDRESS = 0x0d
