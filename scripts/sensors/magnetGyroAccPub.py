@@ -37,14 +37,14 @@ class SensorsRead:
         dt = new_time - self.current_time
         self.current_time = new_time
         sensorfusion.computeAndUpdateRollPitchYaw(self.acc_data["x"],self.acc_data["y"],self.acc_data["z"],self.gyro_data["x"],self.gyro_data["y"], self.gyro_data["z"],self.compass_data[0], self.compass_data[1], self.compass_data[2], dt)
-        kalmanPub = rospy.Publisher('/accelerometer_publisher', Point, queue_size=120)
+        kalmanPub = rospy.Publisher('/kalman_publisher', Point, queue_size=120)
         kalmanData = Point(sensorfusion.roll, sensorfusion.pitch, sensorfusion.yaw)
         kalmanPub.publish(kalmanData)
         
         
     
 def end():
-    print "first here"
+    print "end"
     bus.close()
 
 if __name__ == '__main__':
